@@ -1,13 +1,21 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using Tickets.Data;
+using Microsoft.EntityFrameworkCore;
+using Tickets.BLL;
+using Tickets.DAL;
 
 var builder = WebApplication.CreateBuilder(args);
+{
+    // Add services to the container.
+    builder.Services.AddRazorPages();
+    builder.Services.AddServerSideBlazor();
 
-// Add services to the container.
-builder.Services.AddRazorPages();
-builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
+    var ConStr = builder.Configuration.GetConnectionString("ConStr");
+
+    builder.Services.AddDbContext<TicketsContext>(Options => Options.UseSqlite(ConStr));
+
+    builder.Services.AddScoped<TicketsBLL>();
+}
 
 var app = builder.Build();
 
