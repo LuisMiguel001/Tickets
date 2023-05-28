@@ -17,8 +17,8 @@ namespace Tickets.Models
         public int PrioridadId { get; set; }
 
         public string? SolicitadoPor { get; set; }
-        
-        public string? Asunto { get; set; }
+
+        public string Asunto { get; set; } = "";
         
         public string? Descripcion { get; set; }
 
